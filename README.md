@@ -109,15 +109,16 @@ The pipeline is structured into three logical layers to ensure data lineage, aud
 ├── data/            # Local Data Lake (Bronze/Silver/Gold) - .gitignored
 ├── docker/          # Dockerfile and environment configs
 └── docker-compose.yaml
+└── setup.sh         # Create .env and give permissions to group airflow
 ```
 
 ## 🚀 Getting Started
 
 1. **Setup Environment:**
-    * Clone the provided example environment file to create your local configuration:
+    * Clone the provided example environment file to create your local configuration and give permition to group airflow to edit:
 
     ```bash
-    cp .env.example .env
+    chmod +x setup.sh && ./setup.sh
     ```
 
     * Ensure your .env file contains your local AIRFLOW_UID (run id -u in your terminal to find it, typically 1000) and your SMTP credentials to enable the automated alerting system.
@@ -125,7 +126,7 @@ The pipeline is structured into three logical layers to ensure data lineage, aud
 2. **Launch the Stack:**
 
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 3. **Access Airflow:** Navigate to localhost:8080 (admin/admin) and trigger the etl_breweries_pipeline.
