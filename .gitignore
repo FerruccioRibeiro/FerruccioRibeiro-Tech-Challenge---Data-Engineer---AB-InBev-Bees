@@ -1,6 +1,11 @@
+# Arquivos de ambiente e segredos
+.env
 .venv
 
+# Dados do Data Lake (não queremos subir gigas de JSON/Parquet)
 data/
+logs/
 
+# Python
 __pycache__/
 *.py[cod]

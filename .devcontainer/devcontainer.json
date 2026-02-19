@@ -1,0 +1,10 @@
+{
+    "name": "Airflow Dev",
+    "dockerComposeFile": [
+        "../docker-compose.yaml",
+        "docker-compose.yml"
+    ],
+    "service": "airflow-scheduler", 
+    "workspaceFolder": "/opt/airflow",
+    "remoteUser": "airflow"
+}
