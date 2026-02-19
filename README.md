@@ -117,9 +117,15 @@ The pipeline is structured into three logical layers to ensure data lineage, aud
 1. **Setup Environment:**
     * Clone the provided example environment file to create your local configuration and give permition to group airflow to edit:
 
-    ```bash
-    chmod +x setup.sh && ./setup.sh
-    ```
+        * For Linux Users:
+        ```bash
+        chmod +x setup.sh && ./setup.sh
+        ```
+
+        * For Windows Users:
+        ```dos
+        cp .env.example .env
+        ```
 
     * Ensure your .env file contains your local AIRFLOW_UID (run id -u in your terminal to find it, typically 1000) and your SMTP credentials to enable the automated alerting system.
 
