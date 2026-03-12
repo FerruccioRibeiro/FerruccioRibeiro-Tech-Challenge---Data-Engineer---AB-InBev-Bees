@@ -43,7 +43,7 @@ def separate_in_location(path):
     First, read all files in bronze layer
     Second, filter for valid types of breweries in api doc
     Third, take out all duplicated ids
-    Fourth, remove corrupted characters
+    Fourth, remove corrupted characters in object columns
     Fifth, validate schema
     Sixth, put null in the wrong coordinates
     """
@@ -63,7 +63,11 @@ def separate_in_location(path):
         logger.warning(f'[Silver Transformation] Dropping {len(total_duplicated)} records with duplicate IDs')
     df = df.drop_duplicates(subset=['id'])
 
-    df = df.replace('\ufffd', '', regex=True)
+    str_cols = df.select_dtypes(include=['object']).columns
+    for col in str_cols:
+        # Insert this loop because of postal_code. This keep the column as str
+        df[col] = df[col].astype(str).str.replace('\ufffd', '', regex=True) 
+    df[str_cols] = df[str_cols].replace('nan', np.nan)
 
     try:
         brewery_silver_schema.validate(df, lazy=True)
